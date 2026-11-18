@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b25">
+<title>Future Capsule | ضحى وضاح</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Tahoma,Arial,sans-serif;
+ color:white;
+ background:radial-gradient(ellipse at top,#29245e,#0b102b 60%,#050716);
+ min-height:100vh;
+}
+header{text-align:center;padding:25px 15px}
+.logo{font-size:55px;filter:drop-shadow(0 0 15px #72dfff)}
+h1{color:#9deaff;text-shadow:0 0 15px #687cff}
+header p{color:#c5c6e9;line-height:1.8}
+.container{max-width:540px;margin:auto;padding:14px}
+.profile{
+ text-align:center;padding:20px;
+ border:1px solid #7e7bdb;
+ border-radius:22px;
+ background:#ffffff0c;
+ box-shadow:0 0 25px #7161ff33;
+}
+.avatar{font-size:55px}
+.name{font-size:22px;color:#a8eaff}
+.tag{color:#b8b3e4;font-size:13px}
+nav{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:8px;margin:18px 0;
+}
+nav button{font-size:13px;padding:12px 5px}
+button{
+ border:1px solid #83dfff;
+ background:linear-gradient(120deg,#493b91,#176b91);
+ color:white;padding:13px;
+ border-radius:13px;
+ font-size:15px;cursor:pointer;
+}
+button:active{transform:scale(.97)}
+.section{
+ display:none;margin-top:14px;padding:19px;
+ border-radius:20px;background:#ffffff0c;
+ border:1px solid #7778bd;
+ box-shadow:0 0 18px #5146a522;
+}
+.section.active{display:block}
+h2{color:#9feaff;font-size:20px}
+h3{color:#d3caff}
+input,textarea{
+ width:100%;padding:13px;margin:8px 0;
+ border-radius:11px;border:1px solid #8585c7;
+ background:#101631;color:white;
+ font-family:inherit;font-size:15px;
+}
+textarea{min-height:115px;resize:vertical}
+.full{width:100%;margin-top:9px}
+.item{
+ padding:12px;margin:9px 0;
+ border-radius:12px;background:#ffffff12;
+ border:1px solid #7773b6;
+ display:flex;justify-content:space-between;
+ align-items:center;gap:8px;
+}
+.item button{padding:7px;font-size:12px}
+.hero{text-align:center;padding:15px 5px}
+.planet{font-size:90px;animation:float 3s infinite ease-in-out}
+@keyframes float{50%{transform:translateY(-12px)}}
+.counter{
+ font-size:24px;color:#9feaff;
+ text-align:center;margin:18px 0;
+}
+footer{text-align:center;padding:30px 10px;color:#b7b5dc;line-height:2}
+small{color:#aaa9d0}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">🚀</div>
+ <h1>كبسولة المستقبل</h1>
+ <p>FUTURE CAPSULE<br>رحلة تبدأ اليوم وتصنع المستقبل</p>
+</header>
+
+<main class="container">
+
+<div class="profile">
+ <div class="avatar">👩🏻‍🚀</div>
+ <div class="name">ضحى وضاح ♡</div>
+ <p class="tag">مستقبلي يبدأ بخطوة اليوم</p>
+</div>
+
+<nav>
+ <button onclick="show('home')">🏠 الرئيسية</button>
+ <button onclick="show('goals')">🎯 أهدافي</button>
+ <button onclick="show('letter')">💌 رسالتي</button>
+ <button onclick="show('dreams')">🌟 أحلامي</button>
+ <button onclick="show('achievements')">🏆 إنجازاتي</button>
+ <button onclick="show('capsule')">⏳ الكبسولة</button>
+</nav>
+
+<section class="section active" id="home">
+ <div class="hero">
+  <div class="planet">🪐</div>
+  <h2>أهلاً بكِ يا ضحى!</h2>
+  <p>هذه مساحتك الخاصة لرسم مستقبلك، وتسجيل أحلامك، والاحتفاظ برسائلك لنفسك.</p>
+  <button class="full" onclick="show('goals')">ابدئي بصناعة مستقبلك ✨</button>
+ </div>
+ <h3>رسالة اليوم</h3>
+ <p>لا تنتظري المستقبل ليكون جميلاً، بل اصنعيه بخطواتك اليوم.</p>
+</section>
+
+<section class="section" id="goals">
+ <h2>🎯 أهدافي المستقبلية</h2>
+ <p>اكتبي هدفاً تريدين العمل على تحقيقه.</p>
+ <input id="goalInput" placeholder="هدفي هو...">
+ <button class="full" onclick="addItem('goalInput','goalList','goalsData')">إضافة الهدف +</button>
+ <div id="goalList"></div>
+</section>
+
+<section class="section" id="letter">
+ <h2>💌 رسالة إلى نفسي في المستقبل</h2>
+ <p>ماذا تريدين أن تقولي لنفسك عندما تعودين لقراءة هذه الرسالة؟</p>
+ <textarea id="letterText" placeholder="عزيزتي ضحى في المستقبل..."></textarea>
+ <button class="full" onclick="saveText('letterText','myLetter')">حفظ رسالتي 🔐</button>
+ <p id="letterStatus"></p>
+</section>
+
+<section class="section" id="dreams">
+ <h2>🌟 أحلامي وطموحاتي</h2>
+ <p>اكتبي كيف تتخيلين مستقبلك وما الذي تطمحين إليه.</p>
+ <textarea id="dreamText" placeholder="أحلم بأن أصبح..."></textarea>
+ <button class="full" onclick="saveText('dreamText','myDream')">حفظ أحلامي ✨</button>
+ <p id="dreamStatus"></p>
+</section>
+
+<section class="section" id="achievements">
+ <h2>🏆 إنجازاتي</h2>
+ <p>كل خطوة صغيرة تستحق أن تُسجّل!</p>
+ <input id="achievementInput" placeholder="إنجاز أفتخر به...">
+ <button class="full" onclick="addItem('achievementInput','achievementList','achievementsData')">إضافة إنجاز +</button>
+ <div id="achievementList"></div>
+</section>
+
+<section class="section" id="capsule">
+ <h2>⏳ موعد فتح كبسولتي</h2>
+ <p>اختاري التاريخ الذي تريدين فيه العودة إلى رسالتك.</p>
+ <input type="date" id="openDate">
+ <button class="full" onclick="saveDate()">تحديد موعد اللقاء 🚀</button>
+ <div class="counter" id="countdown">اختاري موعداً للمستقبل</div>
+ <p style="text-align:center">كل يوم يقرّبك من أحلامك 💜</p>
+</section>
+
+</main>
+
+<footer>
+ FUTURE CAPSULE © 2026<br>
+ تصميم وإعداد الطالبة<br>
+ <strong style="color:#9deaff;font-size:22px">ضحى وضاح ♡</strong>
+</footer>
+
+<script>
+function show(id){
+ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function getData(key){
+ try{return JSON.parse(localStorage.getItem(key)||'[]')}
+ catch(e){return []}
+}
+
+function addItem(inputId,listId,key){
+ const input=document.getElementById(inputId);
+ const value=input.value.trim();
+ if(!value){alert('اكتبي شيئاً أولاً!');return}
+ const data=getData(key);
+ data.push(value);
+ localStorage.setItem(key,JSON.stringify(data));
+ input.value='';
+ renderList(listId,key);
+}
+
+function renderList(listId,key){
+ const list=document.getElementById(listId);
+ list.innerHTML='';
+ getData(key).forEach((value,index)=>{
+  const div=document.createElement('div');
+  div.className='item';
+  const span=document.createElement('span');
+  span.textContent='✦ '+value;
+  const btn=document.createElement('button');
+  btn.textContent='حذف';
+  btn.onclick=()=>{
+   const data=getData(key);
+   data.splice(index,1);
+   localStorage.setItem(key,JSON.stringify(data));
+   renderList(listId,key);
+  };
+  div.append(span,btn);
+  list.appendChild(div);
+ });
+}
+
+function saveText(inputId,key){
+ const value=document.getElementById(inputId).value;
+ localStorage.setItem(key,value);
+ const status=key==='myLetter'?'letterStatus':'dreamStatus';
+ document.getElementById(status).textContent='✨ تم الحفظ بنجاح!';
+}
+
+function loadText(inputId,key){
+ document.getElementById(inputId).value=localStorage.getItem(key)||'';
+}
+
+function saveDate(){
+ const date=document.getElementById('openDate').value;
+ if(!date){alert('اختاري التاريخ أولاً');return}
+ if(new Date(date+'T23:59:59')<new Date()){
+  alert('اختاري تاريخاً في المستقبل');
+  return;
+ }
+ localStorage.setItem('capsuleDate',date);
+ updateCountdown();
+}
+
+function updateCountdown(){
+ const date=localStorage.getItem('capsuleDate');
+ const box=document.getElementById('countdown');
+ if(!date){box.textContent='اختاري موعداً للمستقبل';return}
+ const target=new Date(date+'T00:00:00');
+ const diff=target-new Date();
+ if(diff<=0){
+  box.textContent='🎉 حان موعد العودة إلى كبسولتك!';
+  return;
+ }
+ const days=Math.ceil(diff/86400000);
+ box.textContent='بقي '+days+' يوماً على موعدك! ✨';
+}
+
+loadText('letterText','myLetter');
+loadText('dreamText','myDream');
+renderList('goalList','goalsData');
+renderList('achievementList','achievementsData');
+document.getElementById('openDate').value=localStorage.getItem('capsuleDate')||'';
+updateCountdown();
+</script>
+
+</body>
+</html>
